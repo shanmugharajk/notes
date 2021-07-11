@@ -6,12 +6,12 @@
  * through IPC.
  *
  * When running `yarn build` or `yarn build:main`, this file is compiled to
- * `./src/main.prod.js` using webpack. This gives us some performance wins.
+ * `./src/main/main.prod.js` using webpack. This gives us some performance wins.
  */
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, nativeTheme, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -23,6 +23,8 @@ export default class AppUpdater {
     autoUpdater.checkForUpdatesAndNotify();
   }
 }
+
+nativeTheme.themeSource = 'dark';
 
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
 
@@ -74,10 +76,13 @@ const createWindow = async () => {
     width: 1024,
     height: 728,
     icon: getAssetPath('icon.png'),
+    darkTheme: true,
     webPreferences: {
       nodeIntegration: true,
     },
   });
+
+  mainWindow.setBackgroundColor('#111827');
 
   const htmlFilePath = path.resolve(__dirname, '..', 'index.html');
   mainWindow.loadURL(`file://${htmlFilePath}`);
