@@ -44,7 +44,7 @@ export default merge(baseConfig, {
   entry: [
     'core-js',
     'regenerator-runtime/runtime',
-    require.resolve('../../src/index.tsx'),
+    require.resolve('../../src/renderer/index.tsx'),
   ],
 
   output: {
@@ -272,7 +272,7 @@ export default merge(baseConfig, {
     },
     before() {
       console.log('Starting Main Process...');
-        spawn('npm', ['run', 'start:main'], {
+        spawn('npm', ['run', 'dev:main'], {
           shell: true,
           env: process.env,
           stdio: 'inherit',

@@ -79,7 +79,8 @@ const createWindow = async () => {
     },
   });
 
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
+  const htmlFilePath = path.resolve(__dirname, '..', 'index.html');
+  mainWindow.loadURL(`file://${htmlFilePath}`);
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
